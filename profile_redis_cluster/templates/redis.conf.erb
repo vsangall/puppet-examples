@@ -1,7 +1,5 @@
 # Redis configuration — Managed by Puppet
 # Node: <%= @facts['networking']['fqdn'] %>
-# Role: <%= @facts['redis_role'] %>
-# Cluster: <%= @cluster_name %>
 
 bind 0.0.0.0
 port <%= @redis_port %>
@@ -35,14 +33,3 @@ maxmemory-policy <%= @maxmemory_policy %>
 tcp-backlog 511
 timeout 0
 tcp-keepalive 300
-
-<% if @facts['redis_role'] == 'replica' -%>
-# Replica configuration
-replicaof <%= @primary_host %> <%= @redis_port %>
-masterauth <%= @redis_password %>
-replica-serve-stale-data yes
-replica-read-only yes
-<% end -%>
-
-# Include additional configuration
-include /etc/redis/conf.d/*.conf
