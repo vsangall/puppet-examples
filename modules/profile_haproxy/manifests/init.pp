@@ -11,7 +11,7 @@ class profile_haproxy (
   Integer           $stats_port      = lookup('profile_haproxy::stats_port'),
   String            $stats_uri       = lookup('profile_haproxy::stats_uri'),
   String            $stats_user      = lookup('profile_haproxy::stats_user'),
-  Sensitive[String] $stats_password  = Sensitive(lookup('profile_haproxy::stats_password')),
+  String            $stats_password  = lookup('profile_haproxy::stats_password'),
   Integer           $global_maxconn  = lookup('profile_haproxy::global_maxconn'),
   String            $client_timeout  = lookup('profile_haproxy::client_timeout'),
   String            $server_timeout  = lookup('profile_haproxy::server_timeout'),

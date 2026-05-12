@@ -1,0 +1,7 @@
+---
+profile_haproxy::stats_password: "test-haproxy-password"
+profile_haproxy::firewall_provider: "none"
+profile_haproxy::selinux_enabled: false
+profile_haproxy::extra_packages: []
+profile_haproxy::ssl_enabled: false
+profile_haproxy::stick_table_enabled: false

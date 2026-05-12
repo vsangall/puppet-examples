@@ -1,6 +1,27 @@
 # Configure HAProxy — main config and per-backend configs via loop.
 class profile_haproxy::config {
 
+  # Expose parent class parameters as local variables for ERB templates
+  $log_server      = $profile_haproxy::log_server
+  $log_facility    = $profile_haproxy::log_facility
+  $log_level       = $profile_haproxy::log_level
+  $global_maxconn  = $profile_haproxy::global_maxconn
+  $user            = $profile_haproxy::user
+  $group           = $profile_haproxy::group
+  $ssl_enabled     = $profile_haproxy::ssl_enabled
+  $ssl_ciphers     = $profile_haproxy::ssl_ciphers
+  $connect_timeout = $profile_haproxy::connect_timeout
+  $client_timeout  = $profile_haproxy::client_timeout
+  $server_timeout  = $profile_haproxy::server_timeout
+  $retries         = $profile_haproxy::retries
+  $stats_enabled   = $profile_haproxy::stats_enabled
+  $stats_port      = $profile_haproxy::stats_port
+  $stats_uri       = $profile_haproxy::stats_uri
+  $stats_user      = $profile_haproxy::stats_user
+  $stats_password  = $profile_haproxy::stats_password
+  $ssl_cert_path   = $profile_haproxy::ssl_cert_path
+  $backends        = $profile_haproxy::backends
+
   # Main configuration file from ERB template
   file { $profile_haproxy::config_file:
     ensure  => file,

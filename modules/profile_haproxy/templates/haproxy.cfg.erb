@@ -49,6 +49,7 @@ frontend http_front
 <% end -%>
     default_backend webservers
 
+# Backend configurations included from conf.d/
 <% @backends.each do |name, config| -%>
-# Backend configuration included from conf.d/<%= name %>.cfg
+# See conf.d/<%= name %>.cfg for backend '<%= name %>'
 <% end -%>

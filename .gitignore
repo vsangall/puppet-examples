@@ -1,0 +1,9 @@
+# x2a migration artifacts
+migration-plan*.md
+generated-project-metadata.json
+hiera-data-*.json
+.x2a-telemetry.json
+.pytest_cache/
+
+# Generated ansible output
+modules/ansible/
