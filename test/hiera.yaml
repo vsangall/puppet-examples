@@ -1,0 +1,19 @@
+---
+version: 5
+defaults:
+  datadir: data
+  data_hash: yaml_data
+
+hierarchy:
+  - name: "Test overrides"
+    path: "common.yaml"
+
+  - name: "Module data"
+    datadir: "modules/%{module_name}/data"
+    paths:
+      - "nodes/%{trusted.certname}.yaml"
+      - "cluster/%{cluster_name}.yaml"
+      - "datacenter/%{datacenter}.yaml"
+      - "environment/%{environment}.yaml"
+      - "os/%{facts.os.family}.yaml"
+      - "common.yaml"
