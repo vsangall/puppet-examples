@@ -1,0 +1,9 @@
+---
+# RedHat-specific defaults
+
+base_utils::utility_packages:
+  - vim-enhanced
+  - wget
+  - curl
+  - jq
+  - bind-utils

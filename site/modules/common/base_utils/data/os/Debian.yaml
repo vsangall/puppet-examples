@@ -1,0 +1,9 @@
+---
+# Debian-specific defaults
+
+base_utils::utility_packages:
+  - vim
+  - wget
+  - curl
+  - jq
+  - dnsutils

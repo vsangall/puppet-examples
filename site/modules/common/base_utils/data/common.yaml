@@ -1,0 +1,6 @@
+---
+# base_utils module defaults
+
+base_utils::manage_motd: true
+base_utils::motd_template: 'base_utils/motd.erb'
+base_utils::utility_packages: []

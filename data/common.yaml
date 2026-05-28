@@ -1,0 +1,16 @@
+---
+# Environment-level common defaults
+# These apply to all nodes unless overridden at a more specific level.
+
+# NTP configuration
+ntp::servers:
+  - 0.pool.ntp.org
+  - 1.pool.ntp.org
+
+# SSH hardening
+ssh::client_alive_interval: 300
+ssh::permit_root_login: false
+
+# Logging
+syslog::server: 127.0.0.1
+syslog::facility: local0
