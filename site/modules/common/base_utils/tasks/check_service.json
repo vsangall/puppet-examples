@@ -1,0 +1,16 @@
+{
+  "description": "Check if a system service is running",
+  "input_method": "environment",
+  "parameters": {
+    "service": {
+      "description": "Name of the service to check",
+      "type": "String"
+    }
+  },
+  "implementations": [
+    {
+      "name": "check_service.sh",
+      "requirements": ["shell"]
+    }
+  ]
+}

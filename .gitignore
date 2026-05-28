@@ -1,3 +1,11 @@
+# x2a-convertor generated output
+ansible/
+generated-project-metadata.json
+migration-plan*.md
+migration-dependencies/
+.x2a-telemetry.json
+.checklist.json
+export-output.md
 # x2a migration artifacts
 migration-plan*.md
 generated-project-metadata.json

@@ -1,0 +1,4 @@
+---
+# Staging environment overrides
+
+syslog::server: syslog.staging.internal

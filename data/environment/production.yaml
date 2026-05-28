@@ -1,0 +1,9 @@
+---
+# Production environment overrides
+
+ntp::servers:
+  - ntp1.prod.internal
+  - ntp2.prod.internal
+
+syslog::server: syslog.prod.internal
+syslog::facility: local1

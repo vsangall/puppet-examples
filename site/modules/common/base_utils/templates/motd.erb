@@ -1,0 +1,7 @@
+========================================
+  Managed by Puppet
+  Hostname: <%= @facts['networking']['fqdn'] %>
+  OS:       <%= @facts['os']['name'] %> <%= @facts['os']['release']['full'] %>
+  Kernel:   <%= @facts['kernelrelease'] %>
+  Uptime:   <%= @facts['system_uptime']['uptime'] %>
+========================================

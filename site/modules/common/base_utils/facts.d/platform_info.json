@@ -1,0 +1,5 @@
+{
+  "platform_type": "linux",
+  "managed_by": "puppet",
+  "base_utils_version": "1.0.0"
+}
