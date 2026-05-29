@@ -12,12 +12,8 @@
   ],
   "operatingsystem_support": [
     {
-      "operatingsystem": "RedHat",
-      "operatingsystemrelease": ["8", "9"]
-    },
-    {
-      "operatingsystem": "Debian",
-      "operatingsystemrelease": ["11", "12"]
+      "operatingsystem": "Ubuntu",
+      "operatingsystemrelease": ["24.04"]
     }
   ],
   "requirements": [

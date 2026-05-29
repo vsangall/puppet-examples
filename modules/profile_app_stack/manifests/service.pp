@@ -20,10 +20,10 @@ class profile_app_stack::service {
       'log_dir'          => $profile_app_stack::log_dir,
       'log_level'        => $profile_app_stack::log_level,
     }),
-    notify  => Exec['systemd_daemon_reload'],
+    notify  => Exec['app_stack_systemd_daemon_reload'],
   }
 
-  exec { 'systemd_daemon_reload':
+  exec { 'app_stack_systemd_daemon_reload':
     command     => 'systemctl daemon-reload',
     path        => ['/usr/bin', '/bin'],
     refreshonly => true,
@@ -34,7 +34,7 @@ class profile_app_stack::service {
     enable    => true,
     require   => [
       File["/etc/systemd/system/${profile_app_stack::app_name}.service"],
-      Exec['systemd_daemon_reload'],
+      Exec['app_stack_systemd_daemon_reload'],
     ],
     subscribe => File["${profile_app_stack::app_dir}/.env"],
   }

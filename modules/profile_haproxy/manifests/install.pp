@@ -16,8 +16,9 @@ class profile_haproxy::install {
 
   # Ensure haproxy user and group exist
   group { $profile_haproxy::group:
-    ensure => present,
-    system => true,
+    ensure  => present,
+    system  => true,
+    require => Package[$profile_haproxy::package_name],
   }
 
   user { $profile_haproxy::user:
@@ -44,15 +45,4 @@ class profile_haproxy::install {
     mode   => '0750',
   }
 
-  # SELinux policy for HAProxy if on RHEL
-  $selinux_enabled = lookup('profile_haproxy::selinux_enabled', Boolean, 'first', false)
-
-  if $selinux_enabled {
-    exec { 'haproxy_selinux_connect':
-      command => 'setsebool -P haproxy_connect_any 1',
-      unless  => 'getsebool haproxy_connect_any | grep -q on',
-      path    => ['/usr/sbin', '/usr/bin', '/sbin', '/bin'],
-      require => Package[$profile_haproxy::package_name],
-    }
-  }
 }

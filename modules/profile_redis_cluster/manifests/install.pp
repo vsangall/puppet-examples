@@ -9,11 +9,4 @@ class profile_redis_cluster::install {
     appendfsync    => 'everysec',
     manage_package => true,
   }
-
-  file { '/var/log/redis':
-    ensure => directory,
-    owner  => 'redis',
-    group  => 'redis',
-    mode   => '0755',
-  }
 }

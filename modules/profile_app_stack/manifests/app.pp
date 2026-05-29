@@ -1,14 +1,27 @@
 # Application deployment — git clone, pip install, environment config.
 class profile_app_stack::app {
 
-  # Clone application repository
+  # Get python version from hiera
+  $python_version = lookup('profile_app_stack::python_version')
+
+  # Clone application repository (runs as root, then chowns to app user)
   vcsrepo { $profile_app_stack::app_dir:
     ensure   => latest,
     provider => git,
     source   => $profile_app_stack::app_repo,
     revision => $profile_app_stack::app_revision,
-    user     => $profile_app_stack::app_user,
+    owner    => $profile_app_stack::app_user,
+    group    => $profile_app_stack::app_group,
     require  => User[$profile_app_stack::app_user],
+  }
+
+  # Create virtualenv (after git clone)
+  exec { 'create_app_venv':
+    command => "${python_version} -m venv ${profile_app_stack::app_dir}/venv",
+    creates => "${profile_app_stack::app_dir}/venv/bin/activate",
+    user    => $profile_app_stack::app_user,
+    path    => ['/usr/bin', '/usr/local/bin', '/bin'],
+    require => Vcsrepo[$profile_app_stack::app_dir],
   }
 
   # Install Python requirements
@@ -56,7 +69,7 @@ class profile_app_stack::app {
     mode   => '0755',
   }
 
-  # Database migrations
+  # Database migrations (only if alembic is properly initialized)
   exec { 'run_db_migrations':
     command     => "${profile_app_stack::app_dir}/venv/bin/python -m alembic upgrade head",
     cwd         => $profile_app_stack::app_dir,
@@ -64,6 +77,7 @@ class profile_app_stack::app {
     path        => ["${profile_app_stack::app_dir}/venv/bin", '/usr/bin', '/bin'],
     environment => ["DATABASE_URL=${profile_app_stack::db_url}"],
     refreshonly => true,
+    onlyif      => "test -f ${profile_app_stack::app_dir}/alembic.ini && test -f ${profile_app_stack::app_dir}/migrations/env.py",
     subscribe   => Vcsrepo[$profile_app_stack::app_dir],
   }
 }

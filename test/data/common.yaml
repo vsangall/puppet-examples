@@ -1,7 +1,35 @@
 ---
+# profile_haproxy - test overrides
+profile_haproxy::package_name: "haproxy"
 profile_haproxy::stats_password: "test-haproxy-password"
 profile_haproxy::firewall_provider: "none"
-profile_haproxy::selinux_enabled: false
 profile_haproxy::extra_packages: []
 profile_haproxy::ssl_enabled: false
 profile_haproxy::stick_table_enabled: false
+
+# profile_app_stack - override encrypted password with plaintext for testing
+profile_app_stack::app_name: "test-app"
+profile_app_stack::app_repo: "file:///tmp/test-app-repo"
+profile_app_stack::app_revision: "master"
+profile_app_stack::app_port: 8000
+profile_app_stack::app_dir: "/opt/test-app"
+profile_app_stack::app_user: "appuser"
+profile_app_stack::app_group: "appuser"
+profile_app_stack::db_host: "localhost"
+profile_app_stack::db_port: 5432
+profile_app_stack::db_name: "testdb"
+profile_app_stack::db_user: "testuser"
+profile_app_stack::db_password: "test-db-password"
+profile_app_stack::worker_count: 2
+profile_app_stack::worker_class: "sync"
+profile_app_stack::max_requests: 1000
+profile_app_stack::graceful_timeout: 30
+profile_app_stack::log_dir: "/var/log/test-app"
+profile_app_stack::log_level: "info"
+profile_app_stack::secret_key: "test-secret-key"
+profile_app_stack::python_version: "python3"
+profile_app_stack::pip_packages: []
+
+# profile_redis_cluster
+profile_redis_cluster::redis_password: "test-redis-password"
+profile_redis_cluster::maxmemory_mb: 256

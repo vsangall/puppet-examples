@@ -3,7 +3,8 @@ class profile_app_stack::database {
 
   # Only install PostgreSQL locally if db_host is localhost
   if $profile_app_stack::db_host == 'localhost' {
-    package { ['postgresql', 'postgresql-contrib']:
+
+    package { ['postgresql', 'postgresql-contrib', 'libpq-dev']:
       ensure => installed,
     }
 
@@ -38,6 +39,11 @@ class profile_app_stack::database {
     }
   }
 
+  # Ensure cron is installed
+  package { 'cron':
+    ensure => installed,
+  }
+
   # Deploy backup script regardless of db location
   file { '/usr/local/bin/db-backup.sh':
     ensure => file,
@@ -53,5 +59,6 @@ class profile_app_stack::database {
     user    => 'root',
     hour    => 2,
     minute  => 30,
+    require => Package['cron'],
   }
 }

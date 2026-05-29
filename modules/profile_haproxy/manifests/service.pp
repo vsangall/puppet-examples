@@ -28,10 +28,10 @@ class profile_haproxy::service {
     group   => 'root',
     mode    => '0644',
     content => $override_content,
-    notify  => Exec['systemd_daemon_reload'],
+    notify  => Exec['haproxy_systemd_daemon_reload'],
   }
 
-  exec { 'systemd_daemon_reload':
+  exec { 'haproxy_systemd_daemon_reload':
     command     => 'systemctl daemon-reload',
     path        => ['/usr/bin', '/bin'],
     refreshonly => true,
@@ -45,7 +45,7 @@ class profile_haproxy::service {
     require    => [
       Package[$profile_haproxy::package_name],
       Exec['haproxy_config_check'],
-      Exec['systemd_daemon_reload'],
+      Exec['haproxy_systemd_daemon_reload'],
     ],
     subscribe  => File[$config_file],
   }
